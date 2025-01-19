@@ -8,7 +8,7 @@ import Login from "../pages/Register/Login";
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "",
       element: <MainLayout></MainLayout>,
       errorElement: <h2>Routes not found</h2>,
       children: [

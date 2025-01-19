@@ -5,12 +5,39 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import registeranimatedata from '../../assets/lottie/register.json'
 import AUthContext from '../../Context/AuthContext';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 
 const SignUp = () => {
     const [showPassword,setShowPassword] = useState(false);
 
-    const {createUser}= useContext(AUthContext);
+    const {createUser,signInWithGoogle}= useContext(AUthContext);
+
+    const handleGoogleLogin =() => {
+      signInWithGoogle()
+      .then(result => {
+        console.log(result.user)
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "center",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Google Sign in successfully"
+        });
+      })
+      .catch(error => {
+        console.log(error.message)
+      })
+    }
 
     const handleSignUp = e => {
         e.preventDefault();
@@ -23,6 +50,21 @@ const SignUp = () => {
         createUser(email,password)
         .then(result =>{
           console.log(result.user)
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "center",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Sign UP successfully"
+          });
         })
         .catch(error => {
           console.log(error.message)
@@ -117,13 +159,14 @@ const SignUp = () => {
               Sign Up is Successfull.
             </p>
           )} */}
+          <div className="divider w-[90%] mx-auto">OR</div>
   
           <div className="text-center my-4">
             <button
-            //   onClick={handleGoogleSignIn}
+              onClick={handleGoogleLogin}
               className="btn btn-outline bg-yellow-300"
             >
-              <FcGoogle className="text-xl hover:text-white" />
+              <FcGoogle  className="text-xl hover:text-white" />
               Sign Up With Google
             </button>
           </div>

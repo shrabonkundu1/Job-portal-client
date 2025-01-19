@@ -81,7 +81,7 @@ const Navbar = () => {
   );
   return (
     <div className="w-full">
-      <div className="md:navbar   py-2 bg-base-100 w-full lg:max-w-7xl flex md:justify-between items-center  dark:bg-[#1d232a] text-black dark:text-white backdrop-blur-md fixed z-50 top-0">
+      <div className="md:navbar   py-2  w-full lg:max-w-7xl flex md:justify-between items-center  text-black  backdrop-blur-md fixed z-50 top-0">
         <div className="flex  navbar-start mr-5">
           <a className="btn  btn-ghost text-xl">
             {/* <img className="w-10 h-10 rounded-lg mr-1" src={logo} alt="" /> */}

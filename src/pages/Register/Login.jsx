@@ -5,12 +5,39 @@ import { Link } from 'react-router-dom';
 import registerlottiedata from '../../assets/lottie/register.json'
 import Lottie from 'lottie-react';
 import AUthContext from '../../Context/AuthContext';
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
-  const {logInUser} = useContext(AUthContext);
+  const {logInUser,signInWithGoogle} = useContext(AUthContext);
 
     const [showPassword, setShowPassword] = useState(false);
+
+
+    const handleGoogleLogin =() => {
+          signInWithGoogle()
+          .then(result => {
+            console.log(result.user)
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "center",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              }
+            });
+            Toast.fire({
+              icon: "success",
+              title: "Google Sign in successfully"
+            });
+          })
+          .catch(error => {
+            console.log(error.message)
+          })
+        }
 
 
     const handleLogIn = e => {
@@ -24,6 +51,21 @@ const Login = () => {
       logInUser(email,password)
       .then(result => {
         console.log(result.user)
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-center",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Signed in successfully"
+        });
       })
       .catch(error => {
         console.log(error.message)
@@ -83,10 +125,12 @@ const Login = () => {
           </p>
         )}
         {loginError && <p className="text-xl text-red-500">{loginError}</p>} */}
+          <div className="divider w-[90%] mx-auto">OR</div>
+  
   
         <div className="text-center my-4">
           <button
-            // onClick={handleGoogleSignIn}
+            onClick={handleGoogleLogin}
             className="btn btn-outline bg-yellow-300 text-gray-700"
           >
             <FcGoogle className="text-xl hover:text-white" />
