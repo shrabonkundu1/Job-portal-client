@@ -79,15 +79,15 @@ const Navbar = () => {
       </li>
       <div className="flex items-center md:space-x-4 md:hidden">
         {user ? (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-3 space-x-2">
             <img
               src={user.photoURL || "/default-avatar.png"}
               alt="User Avatar"
-              className="w-8 h-8 rounded-full"
+              className="w-10 h-10 rounded-full"
             />
             <button
               onClick={handleLogout}
-              className="text-sm text-[#0077b6] font-bold"
+              className="text-sm text-[#0077b6] font-bold flex items-center gap-1"
             >
               <TbLogout2 size={19} />
               Logout
@@ -129,15 +129,15 @@ const Navbar = () => {
           {/* User Actions */}
           <div className="md:flex hidden items-center space-x-4">
             {user ? (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center gap-3 space-x-2">
                 <img
                   src={user.photoURL || "/default-avatar.png"}
                   alt="User Avatar"
-                  className="w-8 h-8 rounded-full"
+                  className="w-10 h-10 rounded-full"
                 />
                 <button
                   onClick={handleLogout}
-                  className="text-sm text-[#0077b6] font-bold"
+                  className="text-sm text-[#0077b6] font-bold flex items-center gap-1 border hover:text-white border-[#0077b6] p-3 rounded-md hover:bg-[#0077b6]"
                 >
                   <TbLogout2 size={19} />
                   Logout

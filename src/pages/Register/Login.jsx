@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import registerlottiedata from '../../assets/lottie/register.json'
 import Lottie from 'lottie-react';
 import AUthContext from '../../Context/AuthContext';
@@ -11,16 +11,18 @@ const Login = () => {
 
   const {logInUser,signInWithGoogle} = useContext(AUthContext);
 
+  const navigate  = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
 
     const handleGoogleLogin =() => {
           signInWithGoogle()
           .then(result => {
+            navigate('/')
             console.log(result.user)
             const Toast = Swal.mixin({
               toast: true,
-              position: "center",
+              position: "top-end",
               showConfirmButton: false,
               timer: 2000,
               timerProgressBar: true,
@@ -33,6 +35,7 @@ const Login = () => {
               icon: "success",
               title: "Google Sign in successfully"
             });
+            
           })
           .catch(error => {
             console.log(error.message)
