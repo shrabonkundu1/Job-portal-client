@@ -7,7 +7,7 @@ const Footer = () => {
       <h2 className="flex text-3xl items-center ml-2 md:ml-0 md:justify-center  gap-5 font-semibold  mx-auto">
         {/* <img className="h-16 w-16 rounded-xl" src={logo} alt="" /> */}
         <p className="text-4xl font-bold md:text-5xl text-red-100">
-          <span className="text-blue-600 ">
+          <span className="text-[#0077b6] ">
             <Typewriter
               words={[" Job Portal"]}
               loop={8}
