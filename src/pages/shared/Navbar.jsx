@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { TbBrandFlutter } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
@@ -8,10 +8,17 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import { MdDarkMode, MdGroupAdd } from "react-icons/md";
 import { CiLight, CiLogin, CiLogout } from "react-icons/ci";
 import AUthContext from "../../Context/AuthContext";
+import { div } from "motion/react-client";
+import logo from "../../assets/team/logo.webp";
+import { IoLogoStencil } from "react-icons/io5";
 
 const Navbar = () => {
+  const location = useLocation();
+
   const { user, logOutUser } = useContext(AUthContext);
   const [darkMode, setDarkMode] = useState(false);
+  const [activeLink, setActiveLink] = React.useState(location.pathname);
+
 
   useEffect(() => {
     if (darkMode) {
@@ -21,38 +28,64 @@ const Navbar = () => {
     }
   }, [darkMode]);
 
-    const handleSignOut = () => {
-      logOutUser()
-        .then(() => {
-          logOutUser(null);
-          toast.success("Logout successfully!", {
-            position: "top-center",
-            autoClose: 2000,
-          });
-        })
-        .catch((error) => {});
-    };
+
+
+
+  
+  const getLinkStyle = (path) => `
+  relative px-2 py-2 text-sm font-bold  font_header transition-colors duration-200
+  ${activeLink === path ? 'text-[#e20f3a]' : `${darkMode == true ? "text-white" : "text-black"} hover:text-[#e20f3a]`}
+  before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 
+  before:bg-[#A91D3A] before:transform before:scale-x-0 before:transition-transform
+  before:duration-300 hover:before:scale-x-100
+  ${activeLink === path ? 'before:scale-x-100' : ''}
+`;
+
+
+
+
+  const handleSignOut = () => {
+    logOutUser()
+      .then(() => {
+        logOutUser(null);
+        toast.success("Logout successfully!", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      })
+      .catch((error) => {});
+  };
 
   const links = (
     <div className="space-x-5 md:flex  items-center ">
-      <li>
-        <NavLink to="/">
+      <li className="">
+        <NavLink
+          to="/"
+          className={getLinkStyle('/')} onClick={() => setActiveLink('/')}
+        >
           <FaHome />
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/allreview">
-          <TbBrandFlutter />
-          All Review
+      <li className="">
+        <NavLink
+          to="/allJobs"
+          className={getLinkStyle('/')} onClick={() => setActiveLink('/')}
+        >
+          <FaHome />
+          All Jobs
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/addreview">
-          <TbBrandFlutter />
-          Add Review
+      <li className="">
+        <NavLink
+          to="/addJob"
+          className={getLinkStyle('/')} onClick={() => setActiveLink('/')}
+        >
+          <FaHome />
+          Add Job
         </NavLink>
       </li>
+     
 
       <li>
         <NavLink to="/login" className=" grid md:hidden">
@@ -71,7 +104,7 @@ const Navbar = () => {
       {/* {user && ( */}
       <button
         //   onClick={handleSignOut}
-        className=" md:hidden flex gap-2 font-semibold items-center dark:text-white btn-ghost"
+        className=" md:hidden flex gap-2 font-semibold items-center dark:text-white btn-outline"
       >
         <CiLogout />
         Log Out
@@ -80,25 +113,20 @@ const Navbar = () => {
     </div>
   );
   return (
-    <div className="w-full">
-      <div className="md:navbar   py-2  w-full lg:max-w-7xl flex md:justify-between items-center  text-black  backdrop-blur-md fixed z-50 top-0">
-        <div className="flex  navbar-start mr-5">
-          <a className="btn  btn-ghost text-xl">
+    <div className="bg-white ">
+      <div className=" bg-white py-2  w-[90%] mx-auto flex justify-between items-center  text-black ">
+        <div className="flex items-center ">
+          <a className="text-xl">
             {/* <img className="w-10 h-10 rounded-lg mr-1" src={logo} alt="" /> */}
-            <p className="font-semibold flex gap-2">
-              <span>Job portal</span>
-              <span className="text-blue-900"></span>
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className=" grid md:hidden"
-              >
-                {darkMode ? <CiLight /> : <MdDarkMode />}
-              </button>
+            <p className="font-semibold flex items-center gap-2">
+              <IoLogoStencil className="text-blue-700 text-4xl" />{" "}
+              <span className="text-black font-bold text-3xl">Future Hire</span>
+              
             </p>
           </a>
         </div>
 
-        <div className="navbar-center  ">
+        <div className="  flex">
           <div className="hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links} </ul>
           </div>
@@ -113,7 +141,7 @@ const Navbar = () => {
         <div className="dropdown ml-[130px] p-[1px] border rounded-lg relative">
           <div
             tabIndex={0}
-            role="button"
+            role=""
             className="btn btn-square btn-ghost  lg:hidden"
           >
             <svg
@@ -137,52 +165,28 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        {/* <div className=" md:navbar-end">
-          {user ? (
-            <div className="  flex items-center gap-5 md:mr-8">
-              <img
-                data-tooltip-id="my-tooltip-1"
-                className="w-10 h-10 rounded-full object-cover hidden md:grid"
-                src={user.photoURL}
-                alt="Profile picture"
-              />
-              <ReactTooltip
-                id="my-tooltip-1"
-                className="z-10 "
-                place="top"
-                variant="info"
-                content={user.displayName}
-              />
 
-              <button
-                onClick={handleSignOut}
-                className="btn btn-outline hidden md:grid dark:text-white btn-ghost"
-              >
-                Log Out
-              </button>
-            </div>
-          ) : (
-            <div className="hidden md:flex gap-2 mr-10">
-              <NavLink to="/login" className="btn">
-                Login
-              </NavLink>
-              <NavLink to="/signup" className="btn">
-                Sign Up
-              </NavLink>
-            </div>
-          )}
-        </div> */}
-        <div className="md:navbar-end">
-          <div className="hidden md:flex gap-2 mr-10">
+        <div className="">
+          <div className="hidden md:flex gap-2 ">
             {user ? (
-              <><button className="btn" onClick={handleSignOut}>Logout</button></>
+              <>
+                <button className="btn btn-outline" onClick={handleSignOut}>
+                  Logout
+                </button>
+              </>
             ) : (
               <>
-                <NavLink to="/login" className="btn">
-                  Login
-                </NavLink>
-                <NavLink to="/signUp" className="btn">
+                <NavLink
+                  to="/signUp"
+                  className="py-2 font-semibold underline mr-10"
+                >
                   Sign Up
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className="btn btn-primary font-bold bg-blue-600 text-white"
+                >
+                  Login
                 </NavLink>
               </>
             )}
