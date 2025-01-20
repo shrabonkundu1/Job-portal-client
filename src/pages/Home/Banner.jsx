@@ -5,10 +5,12 @@ import team1 from "../../assets/team/team1.jpg";
 import team2 from "../../assets/team/team2.jpg";
 import { RxDragHandleDots1 } from "react-icons/rx";
 import { PiDotsSixThin } from "react-icons/pi";
+import { div } from "motion/react-client";
 
 const Banner = () => {
   return (
-    <div className="grid grid-cols-1 min-h-screen mx-auto pb-16 md:grid-cols-5 gap-12 w-[87%] mb-40">
+   <div className="bg-blue-50 pt-24 ">
+     <div className="grid grid-cols-1 pb-36 mx-auto  md:grid-cols-5 gap-12 w-[75%] max-w-7xl ">
       <div className=" space-y-7 pt-16 flex-1  col-span-3">
         <motion.h1
           initial={{ y: 170, opacity: 0 }}
@@ -124,6 +126,7 @@ const Banner = () => {
         />
       </div>
     </div>
+   </div>
   );
 };
 
