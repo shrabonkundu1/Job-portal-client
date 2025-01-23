@@ -12,7 +12,7 @@ const RunningJobs = () => {
       });
   }, []);
   return (
-    <div className="bg-white py-24 max-w-7xl mx-auto">
+    <div className="bg-white pb-24 max-w-7xl mx-auto">
       <div className="mb-16">
         <h2 className="text-[35px] font-semibold text-black text-center my-3">
           Today's Job Opportunities

@@ -2,7 +2,7 @@ import Lottie from 'lottie-react';
 import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import registeranimatedata from '../../assets/lottie/register.json'
 import AUthContext from '../../Context/AuthContext';
 import { toast } from 'react-toastify';
@@ -12,12 +12,14 @@ import Swal from 'sweetalert2';
 const SignUp = () => {
     const [showPassword,setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
     const {createUser,signInWithGoogle}= useContext(AUthContext);
 
+    const from  =  location.state || '/';
     const handleGoogleLogin =() => {
       signInWithGoogle()
       .then(result => {
-        navigate('/')
+        navigate(from)
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
@@ -49,7 +51,7 @@ const SignUp = () => {
 
         createUser(email,password)
         .then(result =>{
-          console.log(result.user)
+          navigate(form)
           const Toast = Swal.mixin({
             toast: true,
             position: "center",
