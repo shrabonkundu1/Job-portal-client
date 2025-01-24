@@ -27,8 +27,8 @@ import ApplyJob from "../pages/Home/ApplyJob";
             loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
         },
         {
-            path: "/applyJob",
-            element: <ApplyJob></ApplyJob>, 
+            path: "/applyJob/:id",
+            element:<PrivateRoute> <ApplyJob></ApplyJob></PrivateRoute>, 
         },
         {
             path: "/signUp",

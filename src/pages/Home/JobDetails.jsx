@@ -45,7 +45,7 @@ const JobDetails = () => {
         />
         <div className="flex items-center justify-between mx-auto w-[88%]">
           <p className="text-4xl font-bold ">{title}</p>
-          <Link to={"/applyJob"}>
+          <Link to={`/applyJob/${_id}`}>
             <button className="bg-blue-600 p-4 rounded-md hover:bg-black text-white font-bold">
               Apply Now
             </button>
@@ -72,7 +72,7 @@ const JobDetails = () => {
           <div className="flex items-center gap-2">
             <p className="font-medium text-gray-600 text-2xl">Salary:</p>
             <p className="text-gray-800 text-xl">
-              {salaryRange.min} - {salaryRange.max}
+              {salaryRange.min} - {salaryRange.max} {salaryRange.currency}
             </p>
           </div>
           <div className="flex  items-center gap-2 ml-16">
@@ -140,7 +140,7 @@ const JobDetails = () => {
       </div>
       <div className="divider w-3/4 ml-16"></div>
       <div className="w-[91%] mx-auto flex gap-4">
-        <Link to={"/applyJob"}>
+        <Link to={`/applyJob/${_id}`}>
           {" "}
           <button className="bg-blue-600 p-4 rounded-md hover:bg-black text-white font-bold">
             Apply Now
