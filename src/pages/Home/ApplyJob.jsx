@@ -1,11 +1,15 @@
 import React from "react";
+import { use } from "react";
 import { GiTuba } from "react-icons/gi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuth from "../../Hooks/UseAuth";
+import Swal from "sweetalert2";
 
 const ApplyJob = () => {
 
     const {id} = useParams()
     console.log(id)
+    const navigate = useNavigate();
 
     const submitJobApply = e => {
         e.preventDefault();
@@ -16,7 +20,41 @@ const ApplyJob = () => {
 
 
         console.log(Linkedin,Github,Resume)
-    }
+
+        const jobApplication = {
+            job_id :id,
+            applicant_email : user.email,
+            Linkedin,
+            Github,
+            Resume
+        }
+
+        fetch('http://localhost:5000/job_applications',{
+            method:'POST',
+            headers: {
+                'Content-Type':"application/json"
+            },
+            body: JSON.stringify(jobApplication)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+           if(data.insertedId){
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1200
+              });
+              navigate('/myAppliedJobs')
+           }
+              
+        })
+    };
+
+    const {user} = useAuth()
+    console.log(user)
   return (
     <div className="card bg-base-100 w-full max-w-sm mx-auto my-24 shadow-2xl">
       <form className="card-body" onSubmit={submitJobApply}>
