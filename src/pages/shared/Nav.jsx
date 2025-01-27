@@ -71,8 +71,8 @@ const Navbar = () => {
       <li>
         <Link
           to="/job_applications"
-          className={getLinkStyle("/myAppliedJobs")}
-          onClick={() => setActiveLink("/myAppliedJobs")}
+          className={getLinkStyle("/job_applications")}
+          onClick={() => setActiveLink("/job_applications")}
         >
           <MdLocalLibrary size={19} /> My Application
         </Link>

@@ -47,7 +47,7 @@ const ApplyJob = () => {
                 showConfirmButton: false,
                 timer: 1200
               });
-              navigate('/myAppliedJobs')
+              navigate('/job_applications')
            }
               
         })
