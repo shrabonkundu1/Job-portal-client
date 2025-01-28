@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/UseAuth";
+import { Link } from "react-router-dom";
 
 const MyPostedJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -52,12 +53,13 @@ const MyPostedJobs = () => {
                 <td>{job.applicationDeadline}</td>
                 <td>{job.applicationCount}</td>
                 <th>
+                  <Link to={`/viewApplication/${job._id}`}>
                   <button
-                    onClick={() => handleDelete(job._id)}
                     className="btn btn-ghost btn-xs"
                   >
-                    X
+                    View Application
                   </button>
+                  </Link>
                 </th>
               </tr>
             ))}
