@@ -4,48 +4,47 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/UseAuth";
 
 const AddJob = () => {
-
-  const navigate = useNavigate()
-  const {user} = useAuth()
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const handleAddJob = (e) => {
     e.preventDefault();
-    const formData  = new FormData(e.target)
+    const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
 
     // rest use kore distructure
-    const {min, max, currency , ...newJobs} = initialData;
+    const { min, max, currency, ...newJobs } = initialData;
 
     // to set key and value such as{min:"15000",max: "25000", currency: "BDT"}
-    newJobs.salaryRange = {min, max, currency};
+    newJobs.salaryRange = { min, max, currency };
 
-    // create js array  in spilt('\n') method 
-    newJobs.requirements = newJobs.requirements.split('\n');
+    // create js array  in spilt('\n') method
+    newJobs.requirements = newJobs.requirements.split("\n");
 
-    newJobs.responsiblities = newJobs.responsiblities.split('\n');
-    console.log(newJobs)
+    newJobs.responsiblities = newJobs.responsiblities.split("\n");
+    console.log(newJobs);
 
-    // new job post req server side  
-    fetch('http://localhost:5000/jobs', {
-      method:"POST",
+    // new job post req server side
+    fetch("http://localhost:5000/jobs", {
+      method: "POST",
       headers: {
-        'content-type':'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(newJobs)
+      body: JSON.stringify(newJobs),
     })
-    .then(res => res.json())
-    .then(data => {
-      if(data.insertedId){
-                  Swal.fire({
-                      position: "top-center",
-                      icon: "success",
-                      title: "Your work has been saved",
-                      showConfirmButton: false,
-                      timer: 1200
-                    });
-                    navigate('/job_applications')
-                 }
-    })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1200,
+          });
+          navigate("/myPostedJobs");
+        }
+      });
+  };
   return (
     <div className="card bg-base-100 w-3/4 mx-auto my-16  shadow-2xl">
       <h2 className="text-5xl text-center font-bold py-16">Add Job</h2>
@@ -112,10 +111,11 @@ const AddJob = () => {
             <label className="label">
               <span className="label-text">Job Category</span>
             </label>
-            <select defaultValue='Select job category' className="select  select-bordered select-ghost w-full ">
-              <option disabled >
-                Select job category
-              </option>
+            <select
+              defaultValue="Select job category"
+              className="select  select-bordered select-ghost w-full "
+            >
+              <option disabled>Select job category</option>
               <option>Full-time</option>
               <option>Part-time</option>
               <option>Intern</option>
@@ -126,10 +126,11 @@ const AddJob = () => {
             <label className="label">
               <span className="label-text">Job Feild</span>
             </label>
-            <select defaultValue='Select job Feild' className="select  select-bordered select-ghost w-full ">
-              <option disabled >
-                Select job Feild
-              </option>
+            <select
+              defaultValue="Select job Feild"
+              className="select  select-bordered select-ghost w-full "
+            >
+              <option disabled>Select job Feild</option>
               <option>Engineering</option>
               <option>Marketing</option>
               <option>Finance</option>
@@ -165,15 +166,58 @@ const AddJob = () => {
           </div>
           {/* currency */}
           <div className="form-control">
-            <select defaultValue='Select Currency' name="currency" className="select  select-bordered select-ghost w-full ">
-              <option disabled >
-                Select Currency
-              </option>
+            <select
+              defaultValue="Select Currency"
+              name="currency"
+              className="select  select-bordered select-ghost w-full "
+            >
+              <option disabled>Select Currency</option>
               <option>BDT</option>
               <option>USDT</option>
               <option>INR</option>
               <option>DINHAM</option>
             </select>
+          </div>
+        </div>
+
+        {/* hr section  */}
+        <div className="grid items-end grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Hr Name</span>
+            </label>
+            <input
+              type="text"
+              name="hr_name"
+              placeholder="Input Hr name"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Hr Email</span>
+            </label>
+            <input
+              defaultValue={user?.email}
+              type="email"
+              name="hr_email"
+              placeholder="Input Hr email"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Deadline</span>
+            </label>
+            <input
+              type="date"
+              name="applicationDeadline"
+              placeholder=""
+              className="input input-bordered"
+              required
+            />
           </div>
         </div>
 
@@ -183,7 +227,7 @@ const AddJob = () => {
             <span className="label-text">Description</span>
           </label>
           <textarea
-            name="descrioption"
+            name="description"
             placeholder="Description"
             className="textarea textarea-bordered textarea-lg w-full "
           ></textarea>
@@ -213,35 +257,6 @@ const AddJob = () => {
               className="textarea textarea-bordered textarea-lg w-full "
             ></textarea>
           </div>
-        </div>
-
-      {/* hr section  */}
-        <div className="grid items-end grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Hr Name</span>
-          </label>
-          <input
-            type="text"
-            name="hr_name"
-            placeholder="Input Hr name"
-            className="input input-bordered"
-            required
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Hr email</span>
-          </label>
-          <input
-          defaultValue={user?.email}
-            type="email"
-            name="hr_email"
-            placeholder="Input Hr email"
-            className="input input-bordered"
-            required
-          />
-        </div>
         </div>
 
         <div className="form-control mt-6">

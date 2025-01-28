@@ -86,6 +86,15 @@ const Navbar = () => {
           <MdBookmarkAdd size={19} /> Add Job
         </Link>
       </li>
+      <li>
+        <Link
+          to="/myPostedJobs"
+          className={getLinkStyle("/myPostedJobs")}
+          onClick={() => setActiveLink("/myPostedJobs")}
+        >
+          <MdLocalLibrary size={19} /> My Posted Jobs
+        </Link>
+      </li>
       <div className="flex items-center md:space-x-4 md:hidden">
         {user ? (
           <div className="flex items-center gap-3 space-x-2">
