@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
 import { data } from "autoprefixer";
+import axios from "axios";
+import { tr } from "motion/react-client";
 
 const MyAppliedJob = () => {
   const { user } = useAuth();
@@ -9,11 +11,16 @@ const MyAppliedJob = () => {
   console.log(jobs);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/job_applications/?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setJobs(data);
-      });
+    // fetch(`http://localhost:5000/job_applications/?email=${user.email}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setJobs(data);
+    //   });
+
+    axios.get(`http://localhost:5000/job_applications/?email=${user.email}`,{withCredentials:true})
+    .then(res => {
+      console.log(setJobs(res.data))
+    })
   }, [user.email]);
 
   // calling delete function

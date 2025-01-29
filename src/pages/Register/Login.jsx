@@ -6,6 +6,7 @@ import registerlottiedata from '../../assets/lottie/register.json'
 import Lottie from 'lottie-react';
 import AUthContext from '../../Context/AuthContext';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 
 const Login = () => {
@@ -56,7 +57,15 @@ const Login = () => {
 
       logInUser(email,password)
       .then(result => {
-        navigate(form)
+        console.log(result.user)
+        // ----------------create token
+        const user = {email: result.user.email}
+
+        axios.post('http://localhost:5000/jwt', user, {withCredentials:true})
+        .then(res =>{
+          console.log(res.data)
+        })
+        // navigate(form)
         const Toast = Swal.mixin({
           toast: true,
           position: "top-center",
