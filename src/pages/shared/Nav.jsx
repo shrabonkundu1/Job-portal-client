@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import AUthContext from "../../Context/AuthContext";
@@ -10,6 +8,7 @@ import { IoLogoStencil } from "react-icons/io5";
 import { CgLogIn } from "react-icons/cg";
 import { SiSecurityscorecard } from "react-icons/si";
 import { TbLogout2 } from "react-icons/tb";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AUthContext);
@@ -24,9 +23,12 @@ const Navbar = () => {
   const handleLogout = () => {
     logOutUser()
       .then(() => {
-        toast.success("Logged out successfully!", {
-          position: "top-center",
-          autoClose: 2000,
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logged out successfully!",
+          showConfirmButton: false,
+          timer: 1500,
         });
       })
       .catch((error) => {

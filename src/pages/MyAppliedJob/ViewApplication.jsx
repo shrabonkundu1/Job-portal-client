@@ -9,7 +9,7 @@ const ViewApplication = () => {
   console.log(job_id);
   console.log(application);
   useEffect(() => {
-    fetch(`http://localhost:5000/job_application/jobs/${job_id}`)
+    fetch(`https://job-portal-server-phi-five.vercel.app/job_application/jobs/${job_id}`)
       .then((res) => res.json())
       .then((data) => {
         setApplication(data);
@@ -23,7 +23,7 @@ const ViewApplication = () => {
         status : e.target.value
     }
 
-    fetch(`http://localhost:5000/job_application/${id}`,{
+    fetch(`https://job-portal-server-phi-five.vercel.app/job_application/${id}`,{
         method: "PATCH",
         headers:{
             "content-type":"application/json"
@@ -35,7 +35,7 @@ const ViewApplication = () => {
         console.log(data)
          if (data.modifiedCount) {
                   Swal.fire({
-                    position: "top-center",
+                    position: "center",
                     icon: "success",
                     title: "Status Update Successfully",
                     showConfirmButton: false,

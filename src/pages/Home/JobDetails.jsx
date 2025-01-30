@@ -11,7 +11,7 @@ const JobDetails = () => {
 
   // useEffect(() => {
   //     setLoading(true)
-  //     fetch(`http://localhost:5000/jobs/${id}`)
+  //     fetch(`https://job-portal-server-phi-five.vercel.app/jobs/${id}`)
   //     .then(res => res.json())
   //     .then(data => {
   //         // console.log(data)

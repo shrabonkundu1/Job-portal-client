@@ -27,7 +27,7 @@ import ViewApplication from "../pages/MyAppliedJob/ViewApplication";
         {
             path: "/jobs/:id",
             element: <PrivateRoute><JobDetails></JobDetails></PrivateRoute>, 
-            loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
+            loader: ({params}) => fetch(`https://job-portal-server-phi-five.vercel.app/jobs/${params.id}`),
         },
         {
             path: "/applyJob/:id",

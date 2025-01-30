@@ -4,25 +4,34 @@ import Swal from "sweetalert2";
 import { data } from "autoprefixer";
 import axios from "axios";
 import { tr } from "motion/react-client";
+import UseAxiosInstance from "../../Hooks/UseAxiosInstance";
 
 const MyAppliedJob = () => {
   const { user } = useAuth();
+  const axiosSecure = UseAxiosInstance();
   const [jobs, setJobs] = useState([]);
   console.log(jobs);
 
   useEffect(() => {
-    // fetch(`http://localhost:5000/job_applications/?email=${user.email}`)
+    // fetch(`https://job-portal-server-phi-five.vercel.app/job_applications/?email=${user.email}`)
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setJobs(data);
     //   });
 
-    axios.get(`http://localhost:5000/job_applications/?email=${user.email}`,{withCredentials:true})
-    .then(res => {
-      console.log(setJobs(res.data))
-    })
+    // axios.get(`https://job-portal-server-phi-five.vercel.app/job_applications/?email=${user.email}`,{withCredentials:true})
+    // .then(res => {
+    //   console.log(setJobs(res.data))
+    // })
+
+  axiosSecure.get(`/job_applications/?email=${user.email}`)
+  .then(res => {
+    setJobs(res.data);
+  })
+
   }, [user.email]);
 
+  
   // calling delete function
   const handleDelete = (_id) => {
     console.log(_id)
@@ -37,7 +46,7 @@ const MyAppliedJob = () => {
     }).then((result) => {
       console.log(result.user)
       if (result.isConfirmed) { 
-        fetch(`http://localhost:5000/job_applications/${_id}`, {
+        fetch(`https://job-portal-server-phi-five.vercel.app/job_applications/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

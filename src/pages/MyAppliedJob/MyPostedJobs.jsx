@@ -8,7 +8,7 @@ const MyPostedJobs = () => {
   console.log(jobs);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/jobs?email=${user.email}`)
+    fetch(`https://job-portal-server-phi-five.vercel.app/jobs?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

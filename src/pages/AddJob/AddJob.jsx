@@ -24,7 +24,7 @@ const AddJob = () => {
     console.log(newJobs);
 
     // new job post req server side
-    fetch("http://localhost:5000/jobs", {
+    fetch("https://job-portal-server-phi-five.vercel.app/jobs", {
       method: "POST",
       headers: {
         "content-type": "application/json",

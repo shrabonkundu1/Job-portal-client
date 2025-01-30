@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AuthContext from '../Context/AuthContext'
-import {createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import auth from '../Firebase/firebase.init';
+import axios from 'axios';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -30,15 +31,30 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signInWithPopup(auth,googleProvider)
     }
-    useEffect(() => {
-        const unSubscribe  = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser)
-            setLoading(false)
-        })
-        return () => {
-            unSubscribe()
-        }
-    },[])
+    // useEffect(() => {
+    //     const unSubscribe  = onAuthStateChanged(auth, currentUser => {
+    //         setUser(currentUser)
+    //         console.log('state captured', currentUser?.email)
+    //         if(currentUser?.email){
+    //             const user = {email: currentUser.email}
+
+    //             axios.post('https://job-portal-server-phi-five.vercel.app/jwt', user,{withCredentials:true})
+    //             .then(res => {
+    //                 console.log('login:',res.data)
+    //                 setLoading(false)
+    //             })
+    //         }else{
+    //             axios.post('https://job-portal-server-phi-five.vercel.app/login', {},{withCredentials:true})
+    //             .then(res => {
+    //                 console.log('logout:', res.data)
+    //                 setLoading(false)
+    //             })
+    //         }
+    //     })
+    //     return () => {
+    //         unSubscribe()
+    //     }
+    // },[])
 
     const authInfo = {
         user,

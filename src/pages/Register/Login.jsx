@@ -59,12 +59,12 @@ const Login = () => {
       .then(result => {
         console.log(result.user)
         // ----------------create token
-        const user = {email: result.user.email}
+        // const user = {email: result.user.email}
 
-        axios.post('http://localhost:5000/jwt', user, {withCredentials:true})
-        .then(res =>{
-          console.log(res.data)
-        })
+        // axios.post('https://job-portal-server-phi-five.vercel.app/jwt', user, {withCredentials:true})
+        // .then(res =>{
+        //   console.log(res.data)
+        // })
         // navigate(form)
         const Toast = Swal.mixin({
           toast: true,

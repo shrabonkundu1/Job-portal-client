@@ -29,7 +29,7 @@ const ApplyJob = () => {
             Resume
         }
 
-        fetch('http://localhost:5000/job_applications',{
+        fetch('https://job-portal-server-phi-five.vercel.app/job_applications',{
             method:'POST',
             headers: {
                 'Content-Type':"application/json"

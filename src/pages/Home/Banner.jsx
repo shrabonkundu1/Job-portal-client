@@ -9,14 +9,14 @@ import { div } from "motion/react-client";
 
 const Banner = () => {
   return (
-   <div className="bg-blue-50 pt-24 ">
-     <div className="grid grid-cols-1 pb-36 mx-auto  md:grid-cols-5 gap-12 w-[75%] max-w-7xl ">
-      <div className=" space-y-7 pt-16 flex-1  col-span-3">
+   <div className="bg-blue-50 md:pt-24 ">
+     <div className="grid grid-cols-1 pb-16 md:pb-36 mx-auto  md:grid-cols-5 gap-12 w-[75%] max-w-7xl ">
+      <div className=" space-y-7 pt-16 flex-1  md:col-span-3">
         <motion.h1
           initial={{ y: 170, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.5, delay: 0, ease: easeInOut }}
-          className="text-black text-6xl font-bold "
+          className="text-black text-[32px] lg:text-6xl font-bold "
         >
           The <span className="text-blue-600 ">Easiest Way</span>
           <br />
@@ -26,7 +26,7 @@ const Banner = () => {
         <motion.p
           animate={{ y: [100, 0] }}
           transition={{ duration: 1.9, delay: 0, ease: easeInOut }}
-          className="text-[18px] text-gray-500 w-[75%]"
+          className="text-[18px] text-gray-500 md:w-[75%]"
         >
           Each month, more than 3 million job seekers turn to website in their
           search for work, making over 140,000 applications every single day
@@ -34,7 +34,7 @@ const Banner = () => {
         <motion.label
           animate={{ y: [100, 0] }}
           transition={{ duration: 2, delay: 0, ease: easeInOut }}
-          className="input input-bordered flex items-center gap-2 w-4/5 bg-white"
+          className="input input-bordered flex items-center gap-2 md:w-4/5 bg-white"
         >
           <input type="text" className="grow" placeholder="Search" />
           <kbd className="kbd kbd-sm">⌘</kbd>
@@ -43,9 +43,9 @@ const Banner = () => {
         <motion.div
           animate={{ y: [80, 0] }}
           transition={{ duration: 2, delay: 0, ease: easeInOut }}
-          className="flex space-x-2"
+          className="flex gap-x-2 flex-wrap md:flex-row"
         >
-          <p className="font-bold text-gray-600">Popular searches:</p>{" "}
+          <p className="font-bold text-gray-600">Popular searches:</p>
           <a className="text-gray-800 underline" href="#">
             Designer,
           </a>
@@ -65,51 +65,11 @@ const Banner = () => {
       </div>
 
       {/* second */}
-      <div className=" flex-1  col-span-2 ">
-        <motion.div
-          className="z-20"
-          animate={{ y: [-100, -50, -100] }}
-          transition={{ duration: 10, delay: 0, repeat: Infinity }}
-        >
-          <RxDragHandleDots1
-            size={100}
-            opacity={0.2}
-            className="absolute right-[-20px] text-blue-900 z-10 top-36"
-          />
-        </motion.div>
-        <motion.div
-          className="z-20"
-          animate={{ y: [-100, -50, -100] }}
-          transition={{ duration: 10, delay: 0, repeat: Infinity }}
-        >
-          <PiDotsSixThin
-            size={100}
-            opacity={0.2}
-            className="absolute right-[-20px] text-blue-900 z-10 top-36"
-          />
-        </motion.div>
-        <motion.div
-          className="z-20 "
-          animate={{ y: [-15, 20, -15] }}
-          transition={{ duration: 9, delay: 0, repeat: Infinity }}
-        >
-          <PiDotsSixThin
-            size={100}
-            opacity={0.2}
-            className="absolute right-[320px] text-blue-900 z-10 top-80"
-          />
-        </motion.div>
-        <motion.div
-          className="z-20 "
-          animate={{ y: [-15, 20, -15] }}
-          transition={{ duration: 9, delay: 0, repeat: Infinity }}
-        >
-          <RxDragHandleDots1
-            size={100}
-            opacity={0.2}
-            className="absolute right-[320px] text-blue-900 z-10 top-80"
-          />
-        </motion.div>
+      <div className=" flex-1 hidden md:flex md:col-span-2 ">
+       
+     
+       
+      
         <motion.img
           animate={{ y: [0, 30, 0] }}
           transition={{ duration: 4, delay: 0, repeat: Infinity }}
